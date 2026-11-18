@@ -1,3 +1,4 @@
+
 /* ---------------------------------------------------------------------------
  * --  _____       _____ _______                                             -
  * -- |_   _|     |_   _|__   __|                                            -
@@ -8,27 +9,47 @@
  * ---------------------------------------------------------------------------
  */
 
-// =====================================================================
-// Schritt 6: Beispiel
-//
-// Erstellt ein gültiges Beispiel zu eurem Profil. Patientin, Ärztin und
-// Praxis gibt es schon (basis-beispiele.fsh). Entfernt die // und ersetzt
-// die TODOs. Das Beispiel muss alle Regeln aus eurem Profil erfüllen,
-// auch die Invariante: Ist die Allergie bestätigt (confirmed), braucht
-// sie eine Reaktion.
-// =====================================================================
+// DE: Beispiel einer bestätigten Arzneimittelallergie
+// IT: Esempio di allergia a un farmaco confermata
 
-// Instance: TODO_Name                        // z. B. PenicillinAllergieAnna
-// InstanceOf: DgMedicationAllergy
-// Usage: #example
-// Title: "TODO Titel"
-// Description: "TODO: Was zeigt dieses Beispiel?"
-// * patient = Reference(AnnaMuster)
-// * category = TODO
-// * clinicalStatus = $allergy-clinical#TODO
-// * verificationStatus = $allergy-verification#TODO
-// * code = $sct#TODO "TODO Display"
-// * criticality = TODO
-// * onsetDateTime = "TODO"
-// * recorder = Reference(TODO)
-// * reaction.manifestation = $sct#TODO "TODO Display"
+Instance: PenicillinAllergieAnna
+InstanceOf: DgMedicationAllergy
+Usage: #example
+Title: "Penicillinallergie bei Anna Muster"
+Description: "Bestätigte Penicillinallergie mit dokumentierter Reaktion und Beginn im Alter von 30 Jahren."
+
+// DE: Patientin
+// IT: Paziente
+* patient = Reference(AnnaMuster)
+
+// DE: Kategorie Arzneimittel
+// IT: Categoria farmaci
+* category = #medication
+
+// DE: Klinischer Status: aktiv
+// IT: Stato clinico: attivo
+* clinicalStatus = $allergy-clinical#active
+
+// DE: Allergie bestätigt
+// IT: Allergia confermata
+* verificationStatus = $allergy-verification#confirmed
+
+// DE: Allergie gegen Penicillin
+// IT: Allergia alla penicillina
+* code = $sct#91936005 "Allergy to penicillin (finding)"
+
+// DE: Hohe Kritikalität
+// IT: Pericolosità elevata
+* criticality = #high
+
+// DE: Beginn im Alter von 30 Jahren
+// IT: Insorgenza all'età di 30 anni
+* onsetAge = 30 'a' "Jahre"
+
+// DE: Erfasst durch die Ärztin
+// IT: Registrata dalla dottoressa
+* recorder = Reference(DrSaraKeller)
+
+// DE: Dokumentierte Reaktion: Urtikaria
+// IT: Reazione documentata: orticaria
+* reaction[0].manifestation[0] = $sct#126485001 "Urticaria (disorder)"
